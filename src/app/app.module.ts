@@ -10,13 +10,34 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { reducers, metaReducers } from './store/reducers/reducers';
+import { environment } from 'src/environments/environment';
+
+const NGRX_IMPORTS = [
+  // Modulo principal
+  StoreModule.forRoot(reducers, {
+    metaReducers
+  }),
+  // Routing Store
+  StoreRouterConnectingModule.forRoot({
+    stateKey: 'router'
+  }),
+  // Effects
+  EffectsModule.forRoot([]),
+  StoreDevtoolsModule.instrument({
+    name: 'AngularChatNgGx',
+    logOnly: environment.production
+  })
+];
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ...NGRX_IMPORTS // importamos para que funcione en el todo el core de angular
   ],
   providers: [],
   bootstrap: [AppComponent]
