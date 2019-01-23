@@ -11,7 +11,13 @@ export class LoginComponent implements OnInit {
 
   user : IUser;
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService : AuthService) {
+    this.user = {
+      username: 'drivero',
+      email: 'davidmriverog@gmail.com',
+      password: 'test'
+    };
+  }
 
   ngOnInit() {
   }

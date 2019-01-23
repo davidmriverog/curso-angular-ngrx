@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 // ngrx modules
 import { StoreModule } from '@ngrx/store';
@@ -37,6 +39,8 @@ const NGRX_IMPORTS = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    FormsModule,
     ...NGRX_IMPORTS // importamos para que funcione en el todo el core de angular
   ],
   providers: [],
