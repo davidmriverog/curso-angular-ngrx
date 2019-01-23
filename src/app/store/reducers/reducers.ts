@@ -6,7 +6,7 @@ import { RouterStateUrl } from '../shared/utils';
 
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import * as formAuth from './auth.reducer';
+import * as formAuth from '../../auth/reducers/auth.reducer';
 
 // AppState
 export interface State {
