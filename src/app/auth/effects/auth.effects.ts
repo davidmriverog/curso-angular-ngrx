@@ -52,4 +52,18 @@ export class AuthEffects {
             }
         })
     );
+
+    @Effect()
+    LoggedUser$ : Observable<Action> = this.actions$.pipe(
+        ofType<LoggedUser>(AuthActionTypes.LoggedUser),
+        tap(v => console.log('LoggedUser payload', v)),
+        map(data => {
+            console.log(data);
+
+            return {
+                type: '',
+                payload: data
+            };
+        })
+    );
 }
