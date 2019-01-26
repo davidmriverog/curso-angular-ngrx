@@ -17,7 +17,7 @@ const initialState : State = {
 }
 
 // Aplicamos los eventos usandos en el reducers
-export function AuthReducer(state = [], action : AuthActions.actions) {
+export function AuthReducer(state = initialState, action : AuthActions.actions) {
     switch(action.type) {
         case AuthActionTypes.LoginUser:
             return action; // devuelve la accion que es el usuario

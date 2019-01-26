@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../models/IUser';
-import { AuthService } from '../services/auth.service';
+
+import { Store, select } from '@ngrx/store';
+
+import * as Auth from '../actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,10 @@ export class LoginComponent implements OnInit {
 
 	user : IUser;
 
-	constructor(private authService : AuthService) {}
+	error$ = this.store.select(state => state.auth.error);
+	isLoading$ = this.store.select(state => state.auth.isLoading);
+
+	constructor(private store : Store<any>) {}
 
 	ngOnInit() {
 		this.user = {
@@ -19,6 +25,11 @@ export class LoginComponent implements OnInit {
 			email: 'davidmriverog@gmail.com',
 			password: '123'
 		};
+
+		console.log('init', {
+			error: this.error$,
+			isLoading: this.isLoading$
+		});
 	}
 
 	login() {
