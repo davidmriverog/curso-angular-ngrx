@@ -25,15 +25,12 @@ export class LoginComponent implements OnInit {
 			email: 'davidmriverog@gmail.com',
 			password: '123'
 		};
-
-		console.log('init', {
-			error: this.error$,
-			isLoading: this.isLoading$
-		});
 	}
 
 	login() {
-		//
+
+
+		this.store.dispatch(new Auth.LoginUser({user:this.user}))
 	}
 
 }

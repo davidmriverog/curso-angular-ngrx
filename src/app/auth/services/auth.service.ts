@@ -20,10 +20,18 @@ export class AuthService {
 
 	// fake login (temp)
 	login(user : IUser) : Observable<any> {
-		let toSend = false;
+		let toSend = {
+			isLoading: false,
+			error: true,
+			user: {}
+		};
 
 		if (JSON.stringify(user) === JSON.stringify(this.userFacked)) {
-			toSend = true;
+			toSend = {
+				isLoading: false,
+				error: false,
+				user: user
+			};
 		}
 
 		return of(toSend).pipe(delay(5000));

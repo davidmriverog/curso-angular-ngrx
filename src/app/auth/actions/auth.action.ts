@@ -1,5 +1,7 @@
 import { Action  } from '@ngrx/store';
 
+import { IUser } from '../models/IUser';
+
 // 1er ENUM
 export enum AuthActionTypes {
 
@@ -17,15 +19,15 @@ export enum AuthActionTypes {
 
 // implementamos evento al iniciar sesion
 export class LoginUser implements Action {
-    
+
     readonly type = AuthActionTypes.LoginUser;
 
-    constructor(public payload : {user: string, pass: string}) {}
+    constructor(public payload : { user: IUser }) {}
 }
 
 // cuando se accede correctamente almacenamos los que nos envia el json del api
 export class LoggedUser implements Action {
-    
+
     readonly type = AuthActionTypes.LoggedUser;
 
     constructor(public payload : any) {}
@@ -33,7 +35,7 @@ export class LoggedUser implements Action {
 
 // Action a enviar a realizar cuando es un error de inicio.
 export class LoginUserError implements Action {
-    
+
     readonly type = AuthActionTypes.LoginUserError;
 
     constructor(public payload : { error: string }) {}
@@ -57,7 +59,7 @@ export class LogoutAuth implements Action {
 
 
 // export actions
-export type actions = 
+export type actions =
     LoginUser
     | LoggedUser
     | LoginUserError
