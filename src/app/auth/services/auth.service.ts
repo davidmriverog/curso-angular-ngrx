@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
 
-import { from, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IUser } from '../models/IUser';
+
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+	userFacked: IUser = {
+		email: 'davidmriverog@gmail.com',
+		username: 'drivero',
+		password: '123'
+	};
 
-  // fake login (temp)
-  login(user : IUser) : Observable<any> {
-    return from([true]);
-  }
+	constructor() { }
+
+	// fake login (temp)
+	login(user : IUser) : Observable<any> {
+		let toSend = false;
+
+		if (JSON.stringify(user) === JSON.stringify(this.userFacked)) {
+			toSend = true;
+		}
+
+		return of(toSend).pipe(delay(5000));
+	}
 }

@@ -9,24 +9,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  user : IUser;
+	user : IUser;
 
-  constructor(private authService : AuthService) {
-    this.user = {
-      username: 'drivero',
-      email: 'davidmriverog@gmail.com',
-      password: 'test'
-    };
-  }
+	constructor(private authService : AuthService) {}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		this.user = {
+			username: 'drivero',
+			email: 'davidmriverog@gmail.com',
+			password: '123'
+		};
+	}
 
-  login() {
-    this.authService.login(this.user)
-      .subscribe((response) => {
-        console.log('callBack Response Login. '+response);
-      });
-  }
+	login() {
+		//
+	}
 
 }

@@ -5,6 +5,11 @@ const routes: Routes = [
 	{
 		path: 'auth',
 		loadChildren: './auth/auth.module#AuthModule'
+	},
+	{
+		path: '',
+		redirectTo: 'auth',
+		pathMatch: 'full'
 	}
 ];
 
