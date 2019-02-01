@@ -1,28 +1,47 @@
 <form class="form-signin">
-
-  <div class="form-label-group" [hidden]="!(isLoading$ | async)">
+  <div class="form-label-group" *ngIf="(isLoading$ | async)">
     <div class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      <div
+        class="progress-bar progress-bar-striped progress-bar-animated"
+        role="progressbar"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        style="width: 100%"
+      ></div>
     </div>
   </div>
 
   <div class="form-label-group">
-    <input type="text" id="inputEmail" class="form-control" name="username"
-      placeholder="Email address" [(ngModel)]="user.username">
+    <input
+      type="text"
+      id="inputEmail"
+      class="form-control"
+      name="username"
+      placeholder="Email address"
+      [(ngModel)]="user.username"
+    />
     <label for="inputEmail">Username</label>
   </div>
 
   <div class="form-label-group">
-    <input type="password" id="inputPassword" name="password"
-      class="form-control" placeholder="Password"
-      [(ngModel)]="user.password">
+    <input
+      type="password"
+      id="inputPassword"
+      name="password"
+      class="form-control"
+      placeholder="Password"
+      [(ngModel)]="user.password"
+    />
     <label for="inputPassword">Password</label>
   </div>
 
-  <button class="btn btn-lg btn-primary btn-block" (click)="login()">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" (click)="login()">
+    Sign in
+  </button>
 
-  <br>
-  <div class="alert alert-warning" role="alert" *ngIf="error$ | async">
+  <br />
+  <div class="alert alert-warning" role="alert" *ngIf="(error$ | async)">
     Credenciales Incorrectas!
   </div>
   <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>

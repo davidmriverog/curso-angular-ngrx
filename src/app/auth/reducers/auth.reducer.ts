@@ -23,7 +23,12 @@ export function AuthReducer(
 ) {
   switch (action.type) {
     case AuthActionTypes.LoginUser:
-      return action; // devuelve la accion que es el usuario
+      //return action;
+      return {
+        ...state,
+        isLoading: true,
+        token: action.payload
+      };
 
     case AuthActionTypes.LoggedUser:
       return {
@@ -39,3 +44,4 @@ export function AuthReducer(
 export const getAuthState = (state: State) => state.user;
 export const getAuthAction = (action: any) => action.payload;
 export const getAuthError = (state: State) => state.error;
+export const getAuthLoading = (state: State) => state.isLoading;

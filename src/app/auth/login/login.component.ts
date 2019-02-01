@@ -5,6 +5,8 @@ import { Store, select } from "@ngrx/store";
 
 import * as Auth from "../actions/auth.action";
 
+import * as fromAuth from "../../store/reducers/reducers";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -13,10 +15,10 @@ import * as Auth from "../actions/auth.action";
 export class LoginComponent implements OnInit {
   user: IUser;
 
-  error$ = this.store.select(state => state.auth.error);
-  isLoading$ = this.store.select(state => state.auth.isLoading);
+  error$ = this.store.select(fromAuth.getAuthError);
+  isLoading$ = this.store.select(fromAuth.getAuthLoading);
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<fromAuth.State>) {}
 
   ngOnInit() {
     this.user = {

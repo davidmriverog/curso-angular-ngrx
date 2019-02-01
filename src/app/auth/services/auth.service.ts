@@ -12,7 +12,7 @@ export class AuthService {
   userFacked: IUser = {
     email: "davidmriverog@gmail.com",
     username: "drivero",
-    password: "1234"
+    password: "123"
   };
 
   constructor() {}
@@ -33,6 +33,6 @@ export class AuthService {
       };
     }
 
-    return of(toSend).pipe(delay(5000));
+    return of(toSend).pipe(delay(2000));
   }
 }

@@ -1,19 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 // ngrx modules
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreRouterConnectingModule, routerReducer } from "@ngrx/router-store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
-import { reducers, metaReducers } from './store/reducers/reducers';
-import { environment } from 'src/environments/environment';
+import { reducers, metaReducers } from "./store/reducers/reducers";
+import { environment } from "src/environments/environment";
+import { AuthService } from "./auth/services/auth.service";
+import { AuthEffects } from "./auth/effects/auth.effects";
 
 const NGRX_IMPORTS = [
   // Modulo principal
@@ -22,21 +24,19 @@ const NGRX_IMPORTS = [
   }),
   // Routing Store
   StoreRouterConnectingModule.forRoot({
-    stateKey: 'router'
+    stateKey: "router"
   }),
   // Effects
-  EffectsModule.forRoot([]),
+  EffectsModule.forRoot([AuthEffects]),
   StoreDevtoolsModule.instrument({
-    name: 'AngularChatNgGx',
+    name: "AngularChatNgGx",
     logOnly: environment.production,
     maxAge: 25
   })
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,7 +44,7 @@ const NGRX_IMPORTS = [
     FormsModule,
     ...NGRX_IMPORTS // importamos para que funcione en el todo el core de angular
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -20,11 +20,7 @@ import { delay } from "rxjs/operators";
   providedIn: "root"
 })
 export class AuthEffects {
-  constructor(
-    private http: HttpClient,
-    private actions$: Actions,
-    private authService: AuthService
-  ) {}
+  constructor(private actions$: Actions, private authService: AuthService) {}
 
   @Effect()
   LoginUser$: Observable<Action> = this.actions$.pipe(
