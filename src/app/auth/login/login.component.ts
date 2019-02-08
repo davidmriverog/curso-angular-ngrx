@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.user = {
       username: "drivero",
-      email: "davidmriverog@gmail.com",
       password: "123"
     };
   }

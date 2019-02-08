@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { IUser } from "../models/IUser";
 
 import { delay } from "rxjs/operators";
@@ -10,7 +10,6 @@ import { delay } from "rxjs/operators";
 })
 export class AuthService {
   userFacked: IUser = {
-    email: "davidmriverog@gmail.com",
     username: "drivero",
     password: "123"
   };
@@ -18,19 +17,21 @@ export class AuthService {
   constructor() {}
 
   // fake login (temp)
-  login(user: IUser): Observable<any> {
+  login(user: any): Observable<any> {
     let toSend = {
-      isLoading: false,
+      isLoading: true,
       error: true,
-      user: {}
+      ...user
     };
 
-    if (JSON.stringify(user) === JSON.stringify(this.userFacked)) {
+    if (JSON.stringify(user.user) === JSON.stringify(this.userFacked)) {
       toSend = {
         isLoading: false,
         error: false,
-        user: user
+        ...user
       };
+    } else {
+      return throwError("Credenciales Incorrectos");
     }
 
     return of(toSend).pipe(delay(2000));

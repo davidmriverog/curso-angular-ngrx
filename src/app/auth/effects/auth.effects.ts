@@ -16,11 +16,16 @@ import {
 
 import { AuthService } from "../services/auth.service";
 import { delay } from "rxjs/operators";
+import { Router } from "@angular/router";
 @Injectable({
   providedIn: "root"
 })
 export class AuthEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private route: Router
+  ) {}
 
   @Effect()
   LoginUser$: Observable<Action> = this.actions$.pipe(
@@ -30,7 +35,7 @@ export class AuthEffects {
     }),
     map(action => action.payload),
     exhaustMap(auth => {
-      return this.authService.login(auth.user).pipe(
+      return this.authService.login(auth).pipe(
         map(response => new LoggedUser(response)),
         catchError(error => of(new LoginUserError(error)))
       );
@@ -41,7 +46,7 @@ export class AuthEffects {
   LoginUserError$: Observable<Action> = this.actions$.pipe(
     ofType<LoginUserError>(AuthActionTypes.LoginUserError), // efecto ofType para los errores de auth
     tap(v => {
-      console.log("LoggedApi", v.payload);
+      console.log("LoginUserError", v.payload);
     }), // evento que se ejecuta al realizar la accion effect
     map(data => {
       // tratamos la data a enviar como respuesta en el effects.
@@ -52,17 +57,11 @@ export class AuthEffects {
     })
   );
 
-  @Effect()
+  @Effect({ dispatch: false })
   LoggedUser$: Observable<Action> = this.actions$.pipe(
     ofType<LoggedUser>(AuthActionTypes.LoggedUser),
-    tap(v => console.log("LoggedUser payload", v)),
-    map(data => {
-      console.log(data);
-
-      return {
-        type: "",
-        payload: data
-      };
+    tap(v => {
+      this.route.navigate(["/home"]);
     })
   );
 }
